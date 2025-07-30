@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Livin' by Mandiri</title>
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: auto;
+                overflow-x: hidden;
+                overflow: visible;
+            }
+            body {
+                font-family: sans-serif;
+                margin: 0 auto;
+                padding: 0;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+            .image-container {
+                position: relative;
+                width: 100%;
+                max-width: 400px;
+                margin: 0 auto;
+                overflow: visible;
+                padding-bottom: 100px;
+                box-sizing: border-box;
+            }
+            .image-container img.bg {
+                width: 100%;
+                display: block;
+            }
+            .overlay-content {
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 2;
+                width: 100%;
+                padding-left: 20px;
+                padding-right: 20px;
+                box-sizing: border-box;
+            }
+            .image-wrapper {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+                margin-top: 7px;
+            }
+            .image-wrapper .img1 {
+                width: 140px;
+                height: auto;
+                object-fit: contain;
+            }
+            .image-wrapper .img2 {
+                width: 100%;
+                max-width: 380px;
+                min-height: 250px;
+                border: 2px solid white;
+                object-fit: cover;
+                border-bottom-right-radius: 150px;
+                box-shadow: 0 0 0 3px #f9b233,      /* lapisan tipis luar di semua sisi */  4px 4px 0 4px #f9b233,  /* tebal di kanan dan bawah */ 8px 8px 15px rgba(0, 0, 0, 0.35);  /*bayangan gelap kanan dan bawah */
+            }
+            .message-container {
+                max-width: 80%;
+                margin: 30px auto;
+                background: linear-gradient(135deg, #ffffff, #f3faff);
+                border: 2px solid #f9b233;
+                border-radius: 20px;
+                padding: 20px 30px;
+                box-shadow: 4px 4px 20px rgba(0,0,0,0.2);
+                font-family: 'Segoe UI', sans-serif;
+                font-size: 18px;
+                color: #333;
+                text-align: center;
+                position: relative;
+                opacity: 0;
+                transform: translateY(30px);
+                animation: fadeInUp 1s ease-out forwards;
+                text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.2);
+            }
+            @keyframes fadeInUp {
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            .icon-dekorasi {
+                font-size: 36px;
+                margin-bottom: 10px;
+                animation: bounce 1s infinite;
+            }
+            @keyframes bounce {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-8px); }
+            }
+            #animated-text::after {
+                content: '|';
+                animation: blink 1s infinite;
+                color: #f9b233;
+            }
+            @keyframes blink {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0; }
+            }
+            .status-bar {
+                width: 80%;
+                margin: 20px auto;
+                text-align: center;
+            }
+            .status-text {
+                font-weight: bold;
+                margin-bottom: 8px;
+                color: #555;
+            }
+            .progress {
+                background-color: #eee;
+                border-radius: 10px;
+                overflow: hidden;
+                height: 12px;
+                box-shadow: inset 0 0 4px rgba(0,0,0,0.1);
+            }
+            .progress-fill {
+                width: 100%;
+                height: 100%;
+                background-color: #f9b233;
+                animation: loading 2.5s ease-out forwards;
+            }
+            @keyframes loading {
+                from { width: 0; }
+                to { width: 100%; }
+            }
+            .ref-id {
+                margin-top: 20px;
+                text-align: center;
+                font-size: 16px;
+                color: #333;
+                font-family: 'Segoe UI', sans-serif;
+            }
+            .ref-code {
+                font-weight: bold;
+                color: #2a8dd2;
+                background-color: #eef6fc;
+                padding: 4px 10px;
+                border-radius: 8px;
+                animation: blinkRef 1.1s infinite;
+            }
+            @keyframes blinkRef {
+                0%, 100% { opacity: 1.1; }
+                50% { opacity: 0.6; }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='a1.jpg') }}" class="bg" alt="Background">
+            <div class="overlay-content">
+                <div class="image-wrapper">
+                    <img src="{{ url_for('static', filename='a12.png') }}" class="img1">
+                    <img src="{{ url_for('static', filename='a6.jpg') }}" class="img2">
+                </div>
+                <div class="message-container">
+                    <div class="icon-dekorasi">🎉</div>
+                    <p id="animated-text"></p>
+                    <audio id="voice-over" autoplay>
+                        <source src="{{ url_for('static', filename='voice1.mp3') }}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+
+                    <script>
+                        const text = "Terima kasih telah mendaftar di layanan undian Livin' by Mandiri. Pendaftaran anda sedang diproses. Sesaat lagi anda akan dihubungi oleh pihak Bank Mandiri untuk proses cetak kode kupon undian anda.";
+                        const speed = 55; // kecepatan ketikan
+                        let i = 0;
+
+                        function typeText() {
+                            if (i < text.length) {
+                                document.getElementById("animated-text").innerHTML += text.charAt(i);
+                                i++;
+                                setTimeout(typeText, speed);
+                            }
+                        }
+
+                        window.addEventListener('DOMContentLoaded', () => {
+                            const audio = document.getElementById('voice-over');
+                            const playPromise = audio.play();
+
+                            if (playPromise !== undefined) {
+                                playPromise
+                                .then(() => {
+                                    // Audio berhasil diputar, mulai ketikan
+                                    typeText();
+                                })
+                                .catch(error => {
+                                     console.log("Autoplay gagal:", error);
+                                     typeText(); // tetap jalankan teks
+                                });
+                            } else {
+                                typeText(); // jika play() tidak mengembalikan promise
+                            }
+                        });
+                    </script>
+                </div>
+                <div class="status-bar">
+                    <div class="status-text">Status: Pendaftaran sedang diproses...</div>
+                    <div class="progress">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+                <div class="ref-id">
+                    Kode Referensi Anda: <span class="ref-code">MND-202507-1****</span>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

